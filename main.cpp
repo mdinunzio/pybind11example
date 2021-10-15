@@ -41,6 +41,7 @@ public:
 				out[i][j] = 255;
 			}
 		}
+		return out;
 	}
 };
 
