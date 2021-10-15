@@ -55,6 +55,7 @@ public:
 	}
 
 	void function_that_takes_a_while() {
+		py::gil_scoped_release release;
 		std::cout << "starting fn" << std::endl;
 		std::this_thread::sleep_for(std::chrono::milliseconds(2000));
 		std::cout << "ended fn" << std::endl;
