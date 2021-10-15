@@ -43,6 +43,14 @@ public:
 		}
 		return out;
 	}
+
+	void set_mult(float val) {
+		multiplier = val;
+	}
+
+	float get_mult() {
+		return multiplier;
+	}
 };
 
 
@@ -56,6 +64,7 @@ PYBIND11_MODULE(module_name, handle) {
 	.def(py::init<float>())
 	.def("multiply", &SomeClass::multiply)
 	.def("multiply_list", &SomeClass::multiply_list)
+	.def_property("multiplier", &SomeClass::get_mult, &SomeClass::set_mult)
 	.def_property_readonly("image", [](SomeClass &self){
 						  py::array out = py::cast(self.make_image());
 						  return out;
