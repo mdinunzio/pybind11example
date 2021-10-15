@@ -56,7 +56,10 @@ PYBIND11_MODULE(module_name, handle) {
 	.def(py::init<float>())
 	.def("multiply", &SomeClass::multiply)
 	.def("multiply_list", &SomeClass::multiply_list)
-	.def("make_image", &SomeClass::make_image)
+	.def("make_image", [](SomeClass &self){
+						  py::array out = py::cast(self.make_image());
+						  return out;
+	})
 	.def("multiply_two", [](SomeClass &self, float one, float two){
 		return py::make_tuple(self.multiply(one), self.multiply(two));
 	});
