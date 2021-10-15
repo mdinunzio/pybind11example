@@ -6,6 +6,8 @@ cmake .. ; cmake --build . --config Release ; python ..\test.py
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <pybind11/numpy.h>
+#include <chrono>
+#include <thread>
 
 namespace py = pybind11;
 
@@ -51,6 +53,12 @@ public:
 	float get_mult() {
 		return multiplier;
 	}
+
+	void function_that_takes_a_while() {
+		std::cout << "starting fn" << std::endl;
+		std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+		std::cout << "ended fn" << std::endl;
+	}
 };
 
 
@@ -71,5 +79,6 @@ PYBIND11_MODULE(module_name, handle) {
 	})
 	.def("multiply_two", [](SomeClass &self, float one, float two){
 		return py::make_tuple(self.multiply(one), self.multiply(two));
-	});
+	})
+	.def("function_that_takes_a_while", &SomeClass::function_that_takes_a_while);
 }
