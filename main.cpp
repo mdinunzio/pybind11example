@@ -21,6 +21,9 @@ public:
 		}
 		return items;
 	}
+	py::tuple multiply_two(float one, float two) {
+		return py::make_tuple(multiply(one), multiply(two));
+	}
 };
 
 
@@ -33,5 +36,6 @@ PYBIND11_MODULE(module_name, handle) {
 						  )
 	.def(py::init<float>())
 	.def("multiply", &SomeClass::multiply)
-	.def("multiply_list", &SomeClass::multiply_list);
+	.def("multiply_list", &SomeClass::multiply_list)
+	.def("multiply_two", &SomeClass::multiply_two);
 }

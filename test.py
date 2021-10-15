@@ -5,3 +5,4 @@ my_class = PySomeClass(5.0)
 
 print(my_class.multiply(8))
 print(my_class.multiply_list([1,2,3,4,5]))
+print(my_class.multiply_two(10, 20))
